@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 const PlatformSchema = new Schema ({
     name: { 
         type: String,
-        minLength: 3,
-        maxLength: 100,
         required: true,
     },
     description: String,

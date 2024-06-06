@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const VideoGameSchema = new Schema({
     name: { type: String, required: true },
     description: String,
-    platform: { 
+    platform: [{ 
         type: Schema.Types.ObjectId,
         ref: "Platform",
         required: true,
-    },
+    }],
     genre: {
         type: Schema.Types.ObjectId,
         ref: "Genre",
@@ -19,10 +19,6 @@ const VideoGameSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Esrb",
         required: true,
-    },
-    mode: {
-        type: String,
-        enum: ["singleplayer", "multiplayer"]
     },
     price: {
         type: Number,
@@ -41,4 +37,4 @@ VideoGameSchema.virtual("url").get(function() {
     return `catalog/videogames/${this._id}`;
 });
 
-mondule.exports = mongoose.model("Video Game", VideoGameSchema);
+module.exports = mongoose.model("Video Game", VideoGameSchema);
