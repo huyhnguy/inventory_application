@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const GenreSchema = new Schema({
     name: {
         type: String,
-        enum: ["adventure", "shooter", "fighting", "survival", "sandbox", "MMO", "RPG", "battle royale", "strategy", "sports", "puzzle", "racing", "simulation", "horror", "MOBA", "cards"]
+        minLength: 1,
+        maxLength: 100,
+        required: true,
     }
 });
 

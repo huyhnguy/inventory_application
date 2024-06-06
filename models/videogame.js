@@ -15,6 +15,11 @@ const VideoGameSchema = new Schema({
         ref: "Genre",
         required: true,
     },
+    esrb: {
+        type: Schema.Types.ObjectId,
+        ref: "Esrb",
+        required: true,
+    },
     mode: {
         type: String,
         enum: ["singleplayer", "multiplayer"]

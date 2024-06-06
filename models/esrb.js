@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const EsrbSchema = new Schema({
     name: {
         type: String,
-        enum: ["Everyone", "Everyone 10+", "Teen", "Mature 17+", "Adults Only 18+", "Rating Pending"]
+        enum: ["Everyone", "Everyone 10+", "Teen", "Mature 17+", "Adults Only 18+", "Rating Pending"],
+        required: true,
+        default: "Rating Pending",
     }
 });
 
