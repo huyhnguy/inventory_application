@@ -11,8 +11,9 @@ const VideoGameSchema = new Schema({
         required: true,
     },
     genre: {
-        type: String,
-        enum: ["adventure", "shooter", "fighting", "survival", "sandbox", "MMO", "RPG", "battle royale", "strategy", "sports", "puzzle", "racing", "simulation", "horror", "MOBA", "cards"]
+        type: Schema.Types.ObjectId,
+        ref: "Genre",
+        required: true,
     },
     mode: {
         type: String,

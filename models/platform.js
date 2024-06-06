@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const PlatformSchema = new Schema ({
     name: { 
         type: String,
-        enum: ["Xbox", "Playstation", "PC", "Nintendo Switch"],
+        minLength: 3,
+        maxLenge: 100,
         required: true,
     },
     description: String,
