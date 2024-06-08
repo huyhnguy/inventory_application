@@ -1,0 +1,28 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+  <main>
+    <h2><%= title %></h2>
+    <% if (videogame_list.length) { %>
+        <ul>
+            <% videogame_list.forEach((videogame) => { %>
+                <li><a href="<%= videogame.url %>"><%= videogame.name %></a> |
+
+                <% videogame.platform.forEach((p) => { %> 
+                    <span><%= p.name %></span>
+                <% }) %>
+               
+            </li>
+            <% }) %>
+        </ul>
+   <% } else { %>
+    <p>There are no video games.</p>
+    <% } %>
+  </main>
+
+</body>
+
+<%- include('./partials/footer') %>

@@ -31,7 +31,14 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 exports.videogame_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: videogame list");
+    const allVideogames = await Videogame.find({}, "name platform")
+        .sort({ name: 1 })
+        .populate("platform")
+        .exec();
+
+    res.render("videogame_list", { 
+        title: "List of Video Games", 
+        videogame_list: allVideogames });
 });
 
 exports.videogame_detail = asyncHandler(async (req, res, next) => {
