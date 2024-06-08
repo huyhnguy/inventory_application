@@ -1,9 +1,31 @@
 const Videogame = require("../models/videogame");
+const Genre = require('../models/genre');
+const Platform = require('../models/platform');
+const Esrb = require('../models/esrb');
+
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Site Home Page")
-})
+    const [
+        numVideogames,
+        numGenres,
+        numPlatforms,
+        numEsrbs,
+    ] = await Promise.all([
+        Videogame.countDocuments({}).exec(),
+        Genre.countDocuments({}).exec(),
+        Platform.countDocuments({}).exec(),
+        Esrb.countDocuments({}).exec(),
+    ]);
+
+    res.render("index", {
+        title: "Gamer Haunt",
+        game_count: numVideogames,
+        genre_count: numGenres,
+        platform_count: numPlatforms,
+        esrb_count: numEsrbs,
+    });
+});
 
 exports.videogame_list = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: videogame list");
