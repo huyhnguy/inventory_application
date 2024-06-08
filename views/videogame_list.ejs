@@ -9,11 +9,10 @@
     <% if (videogame_list.length) { %>
         <ul>
             <% videogame_list.forEach((videogame) => { %>
-                <li><a href="<%= videogame.url %>"><%= videogame.name %></a> |
-
-                <% videogame.platform.forEach((p) => { %> 
+                <li><a href="<%= videogame.url %>"><%= videogame.name %></a> 
+                (<% videogame.platform.forEach((p) => { %> 
                     <span><%= p.name %></span>
-                <% }) %>
+                <% }) %>)
                
             </li>
             <% }) %>

@@ -1,0 +1,25 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+  <main>
+    <h2><%= title %></h2>
+    <% if (platform_list.length) { %>
+        <ul>
+            <% platform_list.forEach((platform) => { %>
+                <li><a href="<%= platform.url %>"><%= platform.name %></a> 
+                <%= platform.description %>
+               
+                </li>
+            <% }) %>
+        </ul>
+   <% } else { %>
+    <p>There are no video games.</p>
+    <% } %>
+  </main>
+
+</body>
+
+<%- include('./partials/footer') %>
