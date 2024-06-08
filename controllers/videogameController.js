@@ -11,19 +11,22 @@ exports.index = asyncHandler(async (req, res, next) => {
         numGenres,
         numPlatforms,
         numEsrbs,
+        randomGame,
     ] = await Promise.all([
         Videogame.countDocuments({}).exec(),
         Genre.countDocuments({}).exec(),
         Platform.countDocuments({}).exec(),
         Esrb.countDocuments({}).exec(),
+        Videogame.findOne({}).exec(),
     ]);
 
     res.render("index", {
-        title: "Gamer Haunt",
+        title: "Home",
         game_count: numVideogames,
         genre_count: numGenres,
         platform_count: numPlatforms,
         esrb_count: numEsrbs,
+        random_game: randomGame
     });
 });
 
