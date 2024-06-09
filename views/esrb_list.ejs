@@ -6,17 +6,15 @@
   
   <main>
     <h2><%= title %></h2>
-    <% if (platform_list.length) { %>
+    <% if (esrb_list.length) { %>
         <ul>
-            <% platform_list.forEach((platform) => { %>
-                <li><a href="<%= platform.url %>"><%= platform.name %></a> 
-                <%= platform.description %>
-               
+            <% esrb_list.forEach((esrb) => { %>
+                <li><a href="<%= esrb.url %>"><%= esrb.name %></a> 
                 </li>
             <% }) %>
         </ul>
    <% } else { %>
-    <p>There are no platforms.</p>
+    <p>There are no esrbs.</p>
     <% } %>
   </main>
 

@@ -6,17 +6,15 @@
   
   <main>
     <h2><%= title %></h2>
-    <% if (platform_list.length) { %>
+    <% if (genre_list.length) { %>
         <ul>
-            <% platform_list.forEach((platform) => { %>
-                <li><a href="<%= platform.url %>"><%= platform.name %></a> 
-                <%= platform.description %>
-               
+            <% genre_list.forEach((genre) => { %>
+                <li><a href="<%= genre.url %>"><%= genre.name %></a> 
                 </li>
             <% }) %>
         </ul>
    <% } else { %>
-    <p>There are no platforms.</p>
+    <p>There are no genres.</p>
     <% } %>
   </main>
 

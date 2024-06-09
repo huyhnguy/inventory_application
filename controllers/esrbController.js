@@ -2,7 +2,14 @@ const Esrb = require("../models/esrb");
 const asyncHandler = require("express-async-handler");
 
 exports.esrb_list = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb list");
+    const allEsrbs = await Esrb.find({}, "name")
+        .sort({ title: 1 })
+        .exec();
+
+    res.render("esrb_list", { 
+        title: "ESRB List", 
+        esrb_list: allEsrbs
+    });
 });
 
 exports.esrb_detail = asyncHandler(async (req, res, next) => {
