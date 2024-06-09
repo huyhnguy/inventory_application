@@ -1,4 +1,5 @@
 const Platform = require("../models/platform");
+const Videogame = require("../models/videogame");
 const asyncHandler = require("express-async-handler");
 
 exports.platform_list = asyncHandler(async(req, res, next) => {
@@ -13,7 +14,22 @@ exports.platform_list = asyncHandler(async(req, res, next) => {
 });
 
 exports.platform_detail = asyncHandler(async (req, res, next) => {
-    res.send(`NOT IMPLEMENTED: platform detail: ${req.params.id}`);
+    const [platform, gamesInPlatform] = await Promise.all([
+        Platform.findById(req.params.id).exec(),
+        Videogame.find({ platform: req.params.id }, "name price").exec(),
+    ]);
+
+    if(platform === null) {
+        const err = new Error("Platform not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("platform_detail", {
+        title: "Platform Detail",
+        platform: platform,
+        platform_games: gamesInPlatform,
+    });
 });
 
 exports.platform_create_get = asyncHandler(async (req, res, next) => {

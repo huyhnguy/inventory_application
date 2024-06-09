@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -34,7 +35,11 @@ const VideoGameSchema = new Schema({
 });
 
 VideoGameSchema.virtual("url").get(function() {
-    return `/catalog/videogames/${this._id}`;
+    return `/catalog/videogame/${this._id}`;
 });
+
+VideoGameSchema.virtual("release_date_formatted").get(function() {
+    return DateTime.fromJSDate(this.release_date).toLocaleString(DateTime.DATE_MED);
+})
 
 module.exports = mongoose.model("Video Game", VideoGameSchema);
