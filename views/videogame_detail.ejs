@@ -1,0 +1,23 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+  <main>
+    <h2><%= title %></h2>
+    <p><strong>Platforms: </strong>
+        <% videogame.platform.forEach((p) => { %>
+            <span><%= p.name %></span>
+        <% }) %>
+    </p>
+    <p><strong>Genre: </strong><%= videogame.genre.name %></p>
+    <p><strong>Esrb: </strong><%= videogame.esrb.name %></p>
+    <p><strong>Price: </strong>$<%= videogame.price %></p>
+    <p><strong>Quantity: </strong><%= videogame.quantity %></p>
+    <p><strong>Release Date: </strong><%= videogame.release_date_formatted %></p>
+  </main>
+
+</body>
+
+<%- include('./partials/footer') %>

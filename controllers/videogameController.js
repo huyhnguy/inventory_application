@@ -42,7 +42,18 @@ exports.videogame_list = asyncHandler(async(req, res, next) => {
 });
 
 exports.videogame_detail = asyncHandler(async (req, res, next) => {
-    res.send(`NOT IMPLEMENTED: videogame detail: ${req.params.id}`);
+    const videogame = await Videogame.findById(req.params.id).populate("platform genre esrb").exec();
+
+    if (videogame === null) {
+        const err = new Error("Video game not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("videogame_detail", {
+        title: videogame.name,
+        videogame: videogame,
+    });
 });
 
 exports.videogame_create_get = asyncHandler(async (req, res, next) => {

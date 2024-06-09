@@ -5,18 +5,16 @@
   <%- include('./partials/header') %>
   
   <main>
-    <section>
-      <h2><%= esrb.name %></h2>
-      <% if (esrb_games.length) { %>
-        <ul>
-          <% esrb_games.forEach((game) => { %>
-            <li><a href="<%= game.url %>"><%= game.name %></a> | $<%= game.price %></li>
-          <% }) %>
-        </ul>
-      <% } else { %>
-        <p>There are no games in this esrb.</p>
-      <% } %>
-    </section>
+    <h2><%= esrb.name %></h2>
+    <% if (esrb_games.length) { %>
+    <ul>
+        <% esrb_games.forEach((game) => { %>
+        <li><a href="<%= game.url %>"><%= game.name %></a> | $<%= game.price %></li>
+        <% }) %>
+    </ul>
+    <% } else { %>
+    <p>There are no games in this esrb.</p>
+    <% } %>
   </main>
 
 </body>
