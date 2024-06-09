@@ -1,4 +1,5 @@
 const Esrb = require("../models/esrb");
+const Videogame = require("../models/videogame");
 const asyncHandler = require("express-async-handler");
 
 exports.esrb_list = asyncHandler(async (req, res, next) => {
@@ -13,7 +14,22 @@ exports.esrb_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.esrb_detail = asyncHandler(async (req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Esrb detail: ${req.params.id}`);
+    const [esrb, gamessInEsrb] = await Promise.all([
+        Esrb.findById(req.params.id).exec(),
+        Videogame.find({ esrb: req.params.id }, "name price").exec(),
+    ]);
+
+    if (esrb === null) {
+        const err = new Error("Esrb not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("esrb_detail", {
+        title: "Esrb Detail",
+        esrb: esrb,
+        esrb_games: gamessInEsrb,
+    });
 });
 
 exports.esrb_create_get = asyncHandler(async (req, res, next) => {
