@@ -1,0 +1,24 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+  <main>
+    <section>
+      <h2><%= genre.name %></h2>
+      <% if (genre_games.length) { %>
+        <ul>
+          <% genre_games.forEach((game) => { %>
+            <li><a href="<%= game.url %>"><%= game.name %></a> | $<%= game.price %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>There are no games in this genre.</p>
+      <% } %>
+    </section>
+  </main>
+
+</body>
+
+<%- include('./partials/footer') %>
