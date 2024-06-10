@@ -1,6 +1,7 @@
 const Esrb = require("../models/esrb");
 const Videogame = require("../models/videogame");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 exports.esrb_list = asyncHandler(async (req, res, next) => {
     const allEsrbs = await Esrb.find({}, "name")
@@ -32,13 +33,44 @@ exports.esrb_detail = asyncHandler(async (req, res, next) => {
     });
 });
 
-exports.esrb_create_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb create GET");
-});
+exports.esrb_create_get = (req, res, next) => {
+    res.render("esrb_form", { 
+        title: "Create Esrb",
+        esrb: undefined,
+        errors: undefined,
+    });
+};
 
-exports.esrb_create_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb create POST");
-});
+exports.esrb_create_post = [
+    body("name", "name is empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        const esrb = new Esrb({ name: req.body.name });
+
+        if(!errors.isEmpty()) {
+            res.render("esrb_form", {
+                title: "Create Esrb",
+                esrb: esrb,
+                errors: errors.array(),
+            });
+            return;
+        } else {
+            const esrbExists = await Esrb.findOne({ name: req.body.name })
+                .collation({ locale: "en", strength: 2 })
+                .exec();
+            if (esrbExists) {
+                res.redirect(esrbExists.url);
+            } else {
+                await esrb.save();
+                res.redirect(esrb.url);
+            }
+        }
+    })
+];
 
 exports.esrb_delete_get = asyncHandler(async (req, res, next) => {
     res.send("NOT IMPLEMENTED: Esrb delete GET");
