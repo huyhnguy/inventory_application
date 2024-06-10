@@ -1,0 +1,29 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+  <main>
+    <h2><%= genre.name %></h2>
+    <% if (genre_games.length) { %>
+        <p><strong>Delete the following games before attempting to delete this genre.</strong></p>
+        <ul>
+            <% genre_games.forEach((game) => { %>
+            <li><a href="<%= game.url %>"><%= game.name %></a> | $<%= game.price %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>Do you really want to delete this genre?</p>
+        <form action="" method="post">
+            <div>
+                <input type="hidden" name="genreid" value="<%= genre._id %>">
+            </div>
+            <input type="submit" value="Delete">
+        </form>
+    <% } %>
+  </main>
+
+</body>
+
+<%- include('./partials/footer') %>

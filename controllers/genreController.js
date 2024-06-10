@@ -75,12 +75,38 @@ exports.genre_create_post = [
 ];
 
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: genre delete GET");
-});
+    const [genre, allGamesInGenre] = await Promise.all([
+        Genre.findById(req.params.id).exec(),
+        Videogame.find({ genre: req.params.id }, "name price").exec(),
+    ]);
+
+    if (genre === null) {
+        res.redirect("/catalog/genres");
+    }
+
+    res.render("genre_delete", {
+        title: "Delete genre",
+        genre: genre,
+        genre_games: allGamesInGenre,
+    });});
 
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: genre delete POST");
-});
+    const [genre, allGamesInGenre] = await Promise.all([
+        Genre.findById(req.params.id).exec(),
+        Videogame.find({ genre: req.params.id }, "name price").exec(),
+    ]);
+
+    if (allGamesInGenre.length > 0) {
+        res.render("genre_delete", {
+            title: "Delete genre",
+            genre: genre,
+            genre_games: allGamesInGenre,
+        });
+        return;
+    } else {
+        await Genre.findByIdAndDelete(req.body.genreid);
+        res.redirect("/catalog/genres");
+    }});
 
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
     res.send("NOT IMPLEMENTED: genre update GET")
