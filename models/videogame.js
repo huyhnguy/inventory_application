@@ -22,7 +22,7 @@ const VideoGameSchema = new Schema({
         required: true,
     },
     price: {
-        type: Number,
+        type: Schema.Types.Decimal128,
         min: [0, "Price can't be negative"],
         required: [true, "Price required"]
     },
@@ -40,6 +40,12 @@ VideoGameSchema.virtual("url").get(function() {
 
 VideoGameSchema.virtual("release_date_formatted").get(function() {
     return DateTime.fromJSDate(this.release_date).toLocaleString(DateTime.DATE_MED);
-})
+});
+
+VideoGameSchema.virtual("release_date_yyyy_mm_dd").get(function() {
+    return DateTime.fromJSDate(this.release_date).toISODate();
+});
+
+
 
 module.exports = mongoose.model("Video Game", VideoGameSchema);

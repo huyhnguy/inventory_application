@@ -1,0 +1,130 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+    <form action="" method="POST">
+        <h2><%= title %></h2>
+            <div>
+                <label for="name">Title:</label>
+                <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required
+                value="<%= videogame === undefined ? '' : videogame.name %>"
+                >   
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input 
+                type="text" 
+                id="description" 
+                name="description" 
+                value="<%= videogame === undefined ? '' : videogame.description %>"
+                >   
+            </div>
+            <div>
+                <label for="platform">Platform:</label>
+                <div>
+                    <% platforms.forEach((platform) => { %>
+                        <div style="display: inline; padding-right: 10px;">
+                            <% if (platform.checked) { %>
+                                <input 
+                                    type="checkbox" 
+                                    value="<%= platform._id %>"
+                                    name="platform"
+                                    id="<%= platform._id %>"
+                                    checked
+                                >
+                            <% } else { %>
+                                <input 
+                                    type="checkbox" 
+                                    value="<%= platform._id %>"
+                                    name="platform"
+                                    id="<%= platform._id %>"
+                                >                         
+                            <% } %>
+                            <label for="<%= platform.id %>"> &nbsp;<%= platform.name %></label>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+            <div>
+                <label for="genre">Genre:</label>
+                <select name="genre" id="genre" required>
+                    <option value="">--Please select a genre--</option>
+                    <% genres.forEach((genre) => {
+                        if (videogame) {
+                            if (genre._id.toString() === videogame.genre._id.toString()) { %>
+                                <option value="<%= genre._id %>" selected><%= genre.name %></option>
+                            <% } else { %>
+                                <option value="<%= genre._id %>"><%= genre.name %></option>
+                            <% }
+                        } else { %>
+                            <option value="<%= genre._id %>"><%= genre.name %></option>
+                        <% } 
+                    }) %>
+                </select>
+            </div>
+            <div>
+                <label for="esrb">Esrb:</label>
+                <select name="esrb" id="esrb" required>
+                    <option value="">--Please select an esrb--</option>
+                    <% esrbs.forEach((esrb) => {
+                        if (videogame) {
+                            if (esrb._id.toString() === videogame.esrb._id.toString()) { %>
+                                <option value="<%= esrb._id %>" selected><%= esrb.name %></option>
+                            <% } else { %>
+                                <option value="<%= esrb._id %>"><%= esrb.name %></option>
+                            <% }
+                        } else { %>
+                            <option value="<%= esrb._id %>"><%= esrb.name %></option>
+                        <% } 
+                    }) %>
+                </select>
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input 
+                type="text" 
+                id="price" 
+                name="price" 
+                value="<%= videogame === undefined ? '' : videogame.price %>"
+                placeholder="e.g.: 15.99"
+                >   
+            </div>
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input 
+                type="number" 
+                id="quantity" 
+                name="quantity" 
+                value="<%= videogame === undefined ? '' : videogame.quantity %>"
+                placeholder="e.g.: 7"
+                >   
+            </div>
+            <div>
+                <label for="release_date">Release Date:</label>
+                <input 
+                type="date" 
+                id="release_date" 
+                name="release_date" 
+                value="<%= videogame === undefined ? '' : videogame.release_date_yyyy_mm_dd %>"
+                >   
+            </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <% if (errors) { %>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+</body>
+
+<%- include('./partials/footer') %>
