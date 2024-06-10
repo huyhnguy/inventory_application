@@ -73,11 +73,39 @@ exports.esrb_create_post = [
 ];
 
 exports.esrb_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb delete GET");
+    const [esrb, allGamesInEsrb] = await Promise.all([
+        Esrb.findById(req.params.id).exec(),
+        Videogame.find({ esrb: req.params.id }, "name price").exec(),
+    ]);
+
+    if (esrb === null) {
+        res.redirect("/catalog/esrbs");
+    }
+
+    res.render("esrb_delete", {
+        title: "Delete esrb",
+        esrb: esrb,
+        esrb_games: allGamesInEsrb,
+    });
 });
 
 exports.esrb_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb delete POST");
+    const [esrb, allGamesInEsrb] = await Promise.all([
+        Esrb.findById(req.params.id).exec(),
+        Videogame.find({ esrb: req.params.id }, "name price").exec(),
+    ]);
+
+    if (allGamesInEsrb.length > 0) {
+        res.render("esrb_delete", {
+            title: "Delete Esrb",
+            esrb: esrb,
+            esrb_games: allGamesInEsrb,
+        });
+        return;
+    } else {
+        await Esrb.findByIdAndDelete(req.body.esrbid);
+        res.redirect("/catalog/esrbs");
+    }
 });
 
 exports.esrb_update_get = asyncHandler(async (req, res, next) => {
