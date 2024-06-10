@@ -1,0 +1,32 @@
+<%- include('./partials/head') %>
+
+<body>
+
+  <%- include('./partials/header') %>
+  
+    <form action="" method="POST">
+        <h2><%= title %></h2>
+        <div>
+            <label for="name">Genre:</label>
+            <input 
+                type="text" 
+                id="name" 
+                required
+                name="name"
+                value="<%= genre === undefined ? '' : genre.name %>"
+            >
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <% if (errors) { %>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+</body>
+
+<%- include('./partials/footer') %>
