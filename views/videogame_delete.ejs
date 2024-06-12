@@ -17,9 +17,20 @@
     <p><strong>Quantity: </strong><%= videogame.quantity %></p>
     <p><strong>Release Date: </strong><%= videogame.release_date_formatted %></p>
   </main>
-  <hr>
-  <p><a href="<%= videogame.url+'/delete' %>">Delete video game</a></p>
-
+  <section>
+    <p>Do you really want to delete this video game?</p>
+    <form action="" method="POST">
+        <div>
+            <input 
+            type="hidden"
+            name="videogameid"
+            id="videogameid"
+            value="<%= videogame._id %>"
+            >
+        </div>
+        <input type="submit" value="Delete">
+    </form>
+  </section>
 </body>
 
 <%- include('./partials/footer') %>

@@ -158,11 +158,21 @@ exports.videogame_create_post = [
 ];
 
 exports.videogame_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: videogame delete GET");
+    const videogame = await Videogame.findById(req.params.id).populate("platform genre esrb").exec();
+
+    if (videogame === null) {
+        res.redirect("/catalog/videogames");
+    }
+
+    res.render("videogame_delete", {
+        title: "Delete Videogame",
+        videogame: videogame,
+    });
 });
 
 exports.videogame_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: videogame delete POST");
+    await Videogame.findByIdAndDelete(req.body.videogameid);
+    res.redirect("/catalog/videogames");
 });
 
 exports.videogame_update_get = asyncHandler(async (req, res, next) => {
