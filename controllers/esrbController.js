@@ -108,10 +108,3 @@ exports.esrb_delete_post = asyncHandler(async (req, res, next) => {
     }
 });
 
-exports.esrb_update_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb update GET")
-});
-
-exports.esrb_update_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Esrb update POST")
-})

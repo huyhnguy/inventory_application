@@ -116,10 +116,3 @@ exports.platform_delete_post = asyncHandler(async (req, res, next) => {
     }
 });
 
-exports.platform_update_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: platform update GET")
-});
-
-exports.platform_update_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: platform update POST")
-})

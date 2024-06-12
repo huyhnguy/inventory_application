@@ -107,11 +107,3 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
         await Genre.findByIdAndDelete(req.body.genreid);
         res.redirect("/catalog/genres");
     }});
-
-exports.genre_update_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: genre update GET")
-});
-
-exports.genre_update_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: genre update POST")
-})
