@@ -12,18 +12,27 @@
     <section>
       <h3>Games</h3>
       <% if (platform_games.length) { %>
+        <p><strong>Delete the following games before attempting to delete this platform.</strong></p>
         <ul>
           <% platform_games.forEach((game) => { %>
             <li><a href="<%= game.url %>"><%= game.name %></a> | $<%= game.price %></li>
           <% }) %>
         </ul>
       <% } else { %>
-        <p>There are no games in this platform.</p>
+        <p>Do you really want to delete this platform?</p>
+        <form action="" method="POST">
+            <div>
+                <input type="hidden"
+                id="platformid"
+                name="platformid"
+                value="<%= platform._id %>"
+                >
+            </div>
+            <input type="submit" value="Delete">
+        </form>
       <% } %>
     </section>
   </main>
-  <hr>
-  <p><a href="<%= platform.url+'/delete' %>">Delete Platform</a></p>
 
 </body>
 

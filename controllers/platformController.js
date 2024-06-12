@@ -81,11 +81,39 @@ exports.platform_create_post = [
 ];
 
 exports.platform_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: platform delete GET");
+    const [platform, allGamesOnPlatform] = await Promise.all([
+        Platform.findById(req.params.id).exec(),
+        Videogame.find({ platform: req.params.id }, "name price").exec(),
+    ]);
+
+    if (platform === null) {
+        res.redirect("/catalog/platforms");
+    }
+
+    res.render("platform_delete", {
+        title: "Delete Platform",
+        platform: platform,
+        platform_games: allGamesOnPlatform,
+    });
 });
 
 exports.platform_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: platform delete POST");
+    const [platform, allGamesOnPlatform] = await Promise.all([
+        Platform.findById(req.params.id).exec(),
+        Videogame.find({ platform: req.params.id }, "name price").exec(),
+    ]);
+
+    if (allGamesOnPlatform.length > 0) {
+        res.render("platform_delete", {
+            title: "Delete Platform",
+            platform: platform,
+            platform_games: allGamesOnPlatform,
+        });
+        return;
+    } else {
+        await Platform.findByIdAndDelete(req.body.platformid)
+        res.redirect("/catalog/platforms");
+    }
 });
 
 exports.platform_update_get = asyncHandler(async (req, res, next) => {
