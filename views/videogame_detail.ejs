@@ -6,6 +6,7 @@
   
   <main>
     <h2><%= title %></h2>
+    <p><strong>Description: </strong><%= videogame.description %></p>
     <p><strong>Platforms: </strong>
         <% videogame.platform.forEach((p) => { %>
             <span><%= p.name %></span>
@@ -19,6 +20,7 @@
   </main>
   <hr>
   <p><a href="<%= videogame.url+'/delete' %>">Delete video game</a></p>
+  <p><a href="<%= videogame.url+'/update' %>">Update video game</a></p>
 
 </body>
 

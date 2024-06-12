@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 
 const VideoGameSchema = new Schema({
     name: { type: String, required: true },
-    description: String,
+    description: {
+        type: String,
+    },
     platform: [{ 
         type: Schema.Types.ObjectId,
         ref: "Platform",
