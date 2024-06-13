@@ -20,7 +20,7 @@ const limiter = RateLimit({
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const dev_db_url = "mongodb+srv://huyhnguy:0WB1B9FkCUxzPI8j@cluster0.btzua6e.mongodb.net/video_games?retryWrites=true&w=majority&appName=Cluster0";
+const dev_db_url = "mongodb+srv://huyhnguy:dSV0CMJ0W1A7JOxs@cluster0.gv2rxq5.mongodb.net/video_games?retryWrites=true&w=majority&appName=Cluster0";
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 main().catch((err) => console.log(err));
