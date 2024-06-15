@@ -5,7 +5,8 @@
 
 ## Why?
 
-The primary motivation behind this project is to deepen my understanding and proficiency in developing Express apps with a MongoDB database. More specifically, I got practical skill and experience in...
+The primary motivation behind this project is to deepen my understanding and proficiency in developing Express apps with a MongoDB database and following Web Content Accessibility Guidelines(WCAG). More specifically, I got practical skill and experience in...
+- Using semantic HTML
 - Creating skeleton websites with Express Application Generator
 - Starting and stopping a Node web server
 - Using a MongoDB database to store my application's data
